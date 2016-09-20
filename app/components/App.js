@@ -33,8 +33,15 @@ var App = OnClickOutside(React.createClass({
         var isDateInstantiated = this.state.selectedDate instanceof Date;
         return (
             <div onFocus={this.focusHandler}>
-                <input type="text" value={isDateInstantiated ? this.state.selectedDate.toLocaleDateString() : ''} readOnly />
-                {this.state.datepickerShown && <Datepicker onSelect={this.clickHandler} currentSelection={this.state.selectedDate} />}
+                <input
+                    type="text"
+                    value={isDateInstantiated ? this.state.selectedDate.toLocaleDateString() : ''}
+                    readOnly
+                />
+                {this.state.datepickerShown && <Datepicker
+                    onDateClick={this.clickHandler}
+                    currentSelection={this.state.selectedDate}
+                />}
             </div>
         );
     }

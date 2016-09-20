@@ -8,8 +8,8 @@ var DatepickerGrid = React.createClass({
     propTypes: {
         year: React.PropTypes.number.isRequired,
         month: React.PropTypes.number.isRequired,
-        onSelect: React.PropTypes.func.isRequired,
-        selected: React.PropTypes.object
+        onDateClick: React.PropTypes.func.isRequired,
+        currentSelected: React.PropTypes.object
     },
 
     getInitialState: function() {
@@ -50,7 +50,7 @@ var DatepickerGrid = React.createClass({
     },
 
     createSelectedDate: function(e) {
-        this.props.onSelect(new Date(this.props.year, this.props.month, e.target.innerHTML));
+        this.props.onDateClick(new Date(this.props.year, this.props.month, e.target.innerHTML));
     },
 
     getFullCalendarGrid: function() {
@@ -79,11 +79,12 @@ var DatepickerGrid = React.createClass({
     },
 
     getDayItems: function(date) {
-        var hasSelection = this.props.selected instanceof Date && this.props.selected.getMonth() == this.props.month;
+        var hasSelection = this.props.currentSelected instanceof Date &&
+            this.props.currentSelected.getMonth() == this.props.month;
         var cellsArray = [];
 
         while (date.getMonth() == this.props.month) {
-            var isSelected = hasSelection && date.toDateString() == this.props.selected.toDateString();
+            var isSelected = hasSelection && date.toDateString() == this.props.currentSelected.toDateString();
             var isToday = date.toDateString() == new Date().toDateString();
             var isReserved = this.state.reservedDays.indexOf(date.getDate()) > -1;
             cellsArray.push(

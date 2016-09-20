@@ -6,7 +6,7 @@ var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July'
 
 var Datepicker = React.createClass({
     propTypes: {
-        onSelect: React.PropTypes.func.isRequired,
+        onDateClick: React.PropTypes.func.isRequired,
         currentSelection: React.PropTypes.object.isRequired
     },
 
@@ -58,10 +58,17 @@ var Datepicker = React.createClass({
             <div className={styles.datepickerPopupBody}>
                 <div className={styles.header}>
                     <button onClick={this.decrementMonth}>&lt;</button>
-                    <div className={styles.currentMonthName}>{monthNames[this.state.selectedMonth]} {this.state.selectedYear}</div>
+                    <div className={styles.currentMonthName}>
+                        {monthNames[this.state.selectedMonth]} {this.state.selectedYear}
+                    </div>
                     <button className={styles.buttonNext} onClick={this.incrementMonth}>&gt;</button>
                 </div>
-                <DatepickerGrid year={this.state.selectedYear} month={this.state.selectedMonth} selected={this.props.currentSelection} onSelect={this.props.onSelect} />
+                <DatepickerGrid
+                    year={this.state.selectedYear}
+                    month={this.state.selectedMonth}
+                    currentSelected={this.props.currentSelection}
+                    onDateClick={this.props.onDateClick}
+                />
             </div>
         );
     }

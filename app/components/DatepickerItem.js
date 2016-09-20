@@ -57,7 +57,12 @@ var DatepickerItem = React.createClass({
 
     render: function() {
         return (
-            <td className={this.getClassName()} onClick={this.props.onClick} onMouseEnter={this.mouseOverHandler} onMouseLeave={this.mouseOutHandler}>
+            <td
+                className={this.getClassName()}
+                onClick={this.props.onClick}
+                onMouseEnter={this.mouseOverHandler}
+                onMouseLeave={this.mouseOutHandler}
+            >
                 {this.props.date != 0 && this.props.date}
             </td>
         );

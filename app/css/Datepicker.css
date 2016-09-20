@@ -1,0 +1,30 @@
+:import('./Constants.css') {
+    borders: borders;
+}
+
+:root {
+    --borders: borders
+}
+
+:local(.datepickerPopupBody) {
+    position: absolute;
+    font-family: Helvetica;
+}
+
+:local(.currentMonthName) {
+    display: inline-block;
+    width: 160px;
+    text-align: center;
+}
+
+:local(.header) {
+    border-top: var(--borders);
+    border-right: var(--borders);
+    border-left: var(--borders);
+    padding: 5px;
+    background-color: #fdfdfd;
+}
+
+:local(.buttonNext) {
+    float: right;
+}

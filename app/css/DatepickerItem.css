@@ -1,0 +1,55 @@
+:import('./Constants.css') {
+    borders: borders;
+}
+
+:root {
+    --borders: borders
+}
+
+:local(.calendarCell) {
+    text-align: center;
+    width: 14%;
+    padding: 4px;
+}
+
+:local(.validCalendarCell) {
+    composes: calendarCell;
+    cursor: pointer;
+    border: var(--borders);
+    background-color: #fefefe;
+    color: #3c3c3c;
+}
+
+:local(.hoveredCalendarCell) {
+    composes: validCalendarCell;
+    background-color: #f9f9f9;
+}
+
+:local(.todayCalendarCell) {
+    composes: validCalendarCell;
+    background-color: #fcff8a;
+    color: #7a750a;
+}
+
+:local(.disabledCalendarCell) {
+    composes: validCalendarCell;
+    background-color: #ffffff;
+    color: #aaaaaa;
+    cursor: default;
+}
+
+:local(.disabledTodayCalendarCell) {
+    composes: todayCalendarCell;
+    cursor: default;
+}
+
+:local(.selectedCalendarCell) {
+    composes: validCalendarCell;
+    background-color: #eeeeee;
+    color: #3c3c3c;
+}
+
+:local(.hoveredSelectedCalendarCell) {
+    composes: validCalendarCell;
+    background-color: #e9e9e9;
+}

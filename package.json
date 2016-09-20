@@ -1,0 +1,29 @@
+{
+  "name": "react-datepicker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "start": "webpack-dev-server"
+  },
+  "author": "ngranko",
+  "license": "MIT",
+  "dependencies": {
+    "node-fetch": "^1.6.1",
+    "react": "^15.3.1",
+    "react-dom": "^15.3.1",
+    "react-onclickoutside": "^5.7.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.14.0",
+    "babel-loader": "^6.2.5",
+    "babel-preset-react": "^6.11.1",
+    "css-loader": "^0.25.0",
+    "html-webpack-plugin": "^2.22.0",
+    "json-loader": "^0.5.4",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.16.1"
+  }
+}

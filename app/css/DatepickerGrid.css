@@ -1,0 +1,17 @@
+:import('./Constants.css') {
+    borders: borders;
+}
+
+:root {
+    --borders: borders
+}
+
+:local(.calendar) {
+    border-collapse: collapse;
+    width: 100%;
+    border: var(--borders);
+}
+
+:local(.headCell) {
+    composes: calendarCell from './DatepickerItem.css';
+}

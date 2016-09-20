@@ -42,6 +42,10 @@ class Router {
         if (!in_array($this->method, $reflection->getMethod('getValidRequestMethods')->invoke(null))) {
             $this->respond(400, 'Method is not supported by the given call');
         }
+
+        if (count($reflection->getMethod('getParamRequirements')->invoke(null)) != count($this->params)) {
+            $this->respond(400, 'Wrong parameter count');
+        }
     }
 
     public function execute() {

@@ -6,4 +6,5 @@ interface Settings {
     const DATABASE_NAME = 'datepicker';
     const DATABASE_USER = 'root';
     const DATABASE_PASSWORD = 'password';
+    const APP_HOST = 'http://localhost:8080';
 }

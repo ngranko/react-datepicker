@@ -1,6 +1,7 @@
 <?php
 namespace DatepickerAPI;
 
+use DatepickerAPI\Settings\Settings;
 use Exception;
 use ReflectionClass;
 
@@ -68,7 +69,7 @@ class Router {
         header('Content-Type: application/json');
         header('Content-Length: ' . strlen($encodedMessage));
         header('Content-MD5: ' . md5($encodedMessage));
-        header('Access-Control-Allow-Origin: http://localhost:8080');
+        header('Access-Control-Allow-Origin: ' . Settings::APP_HOST);
         header('Access-Control-Allow-Credentials: true');
         header('Status: ' . $code);
         echo($encodedMessage);

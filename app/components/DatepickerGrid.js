@@ -1,7 +1,7 @@
 var React = require('react');
 var fetch = require('node-fetch');
 var styles = require('../css/DatepickerGrid.css');
-var DatepickerItem = require('./DatepickerItem');
+var DatepickerItemContainer = require('../containers/DatepickerItemContainer');
 var settings = require('../settings/settings');
 
 var DatepickerGrid = React.createClass({
@@ -50,6 +50,10 @@ var DatepickerGrid = React.createClass({
     },
 
     createSelectedDate: function(e) {
+        var selectedDate = parseInt(e.target.innerHTML);
+        if (this.state.reservedDays.indexOf(selectedDate) > -1) {
+            return;
+        }
         this.props.onDateClick(new Date(this.props.year, this.props.month, e.target.innerHTML));
     },
 
@@ -73,7 +77,7 @@ var DatepickerGrid = React.createClass({
     getEmptyCellsBeforeMonthStart: function(day) {
         var cellsArray = [];
         for (var i = 0; i < day; i++) {
-            cellsArray.push(<DatepickerItem />);
+            cellsArray.push(<DatepickerItemContainer />);
         }
         return cellsArray;
     },
@@ -88,9 +92,9 @@ var DatepickerGrid = React.createClass({
             var isToday = date.toDateString() == new Date().toDateString();
             var isReserved = this.state.reservedDays.indexOf(date.getDate()) > -1;
             cellsArray.push(
-                <DatepickerItem
+                <DatepickerItemContainer
                     date={date.getDate()}
-                    onClick={!isReserved && this.createSelectedDate}
+                    clickHandler={this.createSelectedDate}
                     isToday={isToday}
                     reserved={isReserved}
                     selected={isSelected}
@@ -104,7 +108,7 @@ var DatepickerGrid = React.createClass({
 
     getEmptyCellsAfterMonthEnd: function(cellsArray) {
         while (cellsArray.length % 7 != 0) {
-            cellsArray.push(<DatepickerItem />);
+            cellsArray.push(<DatepickerItemContainer />);
         }
         return cellsArray;
     },

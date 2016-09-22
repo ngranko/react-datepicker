@@ -1,77 +1,36 @@
 var React = require('react');
 var styles = require('../css/Datepicker.css');
-var DatepickerGrid = require('./DatepickerGrid');
+var DatepickerGridContainer = require('../containers/DatepickerGridContainer');
 
 var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-var Datepicker = React.createClass({
-    propTypes: {
-        onDateClick: React.PropTypes.func.isRequired,
-        currentSelection: React.PropTypes.object.isRequired
-    },
-
-    getInitialState: function() {
-        return {
-            selectedYear: new Date().getFullYear(),
-            selectedMonth: new Date().getMonth()
-        };
-    },
-
-    componentWillMount: function() {
-        if (this.props.currentSelection instanceof Date) {
-            this.setState({
-                selectedYear: this.props.currentSelection.getFullYear(),
-                selectedMonth: this.props.currentSelection.getMonth()
-            });
-        }
-    },
-
-    incrementMonth: function() {
-        var newMonth = this.state.selectedMonth + 1;
-        var newState = {};
-        if (newMonth > 11) {
-            newState.selectedMonth = 0;
-            newState.selectedYear = this.state.selectedYear + 1;
-        } else {
-            newState.selectedMonth = newMonth;
-        }
-
-        this.setState(newState);
-    },
-
-    decrementMonth: function() {
-        var newMonth = this.state.selectedMonth - 1;
-        var newState = {};
-        if (newMonth < 0) {
-            newState.selectedMonth = 11;
-            newState.selectedYear = this.state.selectedYear - 1;
-        } else {
-            newState.selectedMonth = newMonth;
-        }
-
-        this.setState(newState);
-    },
-
-    render: function() {
-
-        return (
-            <div className={styles.datepickerPopupBody}>
-                <div className={styles.header}>
-                    <button onClick={this.decrementMonth}>&lt;</button>
-                    <div className={styles.currentMonthName}>
-                        {monthNames[this.state.selectedMonth]} {this.state.selectedYear}
-                    </div>
-                    <button className={styles.buttonNext} onClick={this.incrementMonth}>&gt;</button>
+function Datepicker(props) {
+    return (
+        <div className={styles.datepickerPopupBody}>
+            <div className={styles.header}>
+                <button onClick={props.decrementMonthClickHandler}>&lt;</button>
+                <div className={styles.currentMonthName}>
+                    {monthNames[props.selectedMonth]} {props.selectedYear}
                 </div>
-                <DatepickerGrid
-                    year={this.state.selectedYear}
-                    month={this.state.selectedMonth}
-                    currentSelected={this.props.currentSelection}
-                    onDateClick={this.props.onDateClick}
-                />
+                <button className={styles.buttonNext} onClick={props.incrementMonthClickHandler}>&gt;</button>
             </div>
-        );
-    }
-});
+            <DatepickerGridContainer
+                year={props.selectedYear}
+                month={props.selectedMonth}
+                currentSelected={props.currentSelection}
+                onDateClick={props.onDateClick}
+            />
+        </div>
+    );
+}
+
+Datepicker.propTypes = {
+    decrementMonthClickHandler: React.PropTypes.func.isRequired,
+    incrementMonthClickHandler: React.PropTypes.func.isRequired,
+    selectedMonth: React.PropTypes.number.isRequired,
+    selectedYear: React.PropTypes.number.isRequired,
+    onDateClick: React.PropTypes.func.isRequired,
+    currentSelection: React.PropTypes.object.isRequired
+};
 
 module.exports = Datepicker;
